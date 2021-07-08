@@ -1,3 +1,7 @@
+/*
+  Recursion
+*/
+
 const factorial = (num) => {
   if (num === 1) {
     return 1;
@@ -6,6 +10,9 @@ const factorial = (num) => {
 };
 
 console.log("with recursion: ", factorial(5));
+/*
+  Output: with recursion:  120
+*/
 
 const factorial2 = (num) => {
   let result = num;
@@ -21,6 +28,12 @@ const factorial2 = (num) => {
 };
 
 console.log("without recursion", factorial2(5));
+
+/*
+  Output: without recursion 120
+*/
+
+//-------------------------------------
 
 const numbers = [0, 3, 5, 8, 4, 6, 1, 9, 7];
 
@@ -44,6 +57,13 @@ const findMissingNumbers = (numArray) => {
 
 console.log("Answer: ", findMissingNumbers(numbers));
 
+/*
+  Output: 
+    minNum:  0
+    maxNum:  9
+    Answer:  [2]
+*/
+
 //-------------------------------
 
 function isLeapYear(num) {
@@ -54,6 +74,17 @@ function isLeapYear(num) {
   }
   return false;
 }
+
+console.log("2000: ", isLeapYear(2000));
+console.log("2002: ", isLeapYear(2002));
+console.log("2100: ", isLeapYear(2100));
+
+/*
+  Output: 
+    2000:  true
+    2002:  false
+    2100:  false
+*/
 
 // ----------------------------------
 
@@ -78,11 +109,24 @@ function getDayString(date) {
       return "Invalid day of week!";
   }
 }
+
 console.log("Day: ", getDayString(3));
+
+/*
+  Output: Day:  Tuesday
+*/
+
 // ----------------------------------
 const isInteger = (num) => typeof num === "number";
-console.log(isInteger(3));
-console.log(isInteger("3"));
+console.log("3:", isInteger(3));
+console.log('"3":', isInteger("3"));
+
+/*
+  Output: 
+    3: true
+    "3": false
+*/
+
 // ----------------------------------
 const add_all = (arr) => {
   let sum = 0;
@@ -91,18 +135,23 @@ const add_all = (arr) => {
   });
   return sum;
 };
+
 console.log(add_all([1, 2, 3]));
+
+/*
+  Output: 6
+*/
+
 // ----------------------------------
 const toCelcius = (fahr) => (((fahr - 32) / 9) * 5).toFixed(2);
+
 console.log("32 Farenheit = ", toCelcius(32), " Celcius");
-// ----------------------------------
-const getFact = (num) => {
-  if (num === 1) {
-    return 1;
-  }
-  return num * getFact(num - 1);
-};
-console.log(getFact(5));
+
+/*
+  Output: 
+    32 Farenheit =  0.00  Celcius
+*/
+
 // ----------------------------------
 const denominations = [1, 2, 5, 10, 25].sort((a, b) => b - a);
 const convert_to_coins = (amt, coins) => {
@@ -120,6 +169,11 @@ const convert_to_coins = (amt, coins) => {
 };
 
 console.log(convert_to_coins(87, denominations));
+
+/*
+  Output: [25, 25, 25, 10, 2]
+*/
+
 // ----------------------------------
 var arr = [10, 32, 65, 2];
 for (let i = 0; i < arr.length; i++) {
@@ -127,56 +181,139 @@ for (let i = 0; i < arr.length; i++) {
     console.log("Withing timeout let", i);
   }, 3000);
 }
+
+/*
+  Output: 
+    Withing timeout let 0
+    Withing timeout let 1
+    Withing timeout let 2
+    Withing timeout let 3
+*/
+
 // ----------------------------------
 for (var i = 0; i < arr.length; i++) {
   setTimeout(function () {
     console.log("Withing timeout var", i);
   }, 3000);
 }
+
+/*
+  Output: Withing timeout var 4 (4 times)
+*/
+
+
+var arrX = [10, 32, 65, 2];
+for (var i = 0; i < arrX.length; i++) {
+  ((i) => {setTimeout(function () {
+    console.log("Withing timeout var but used block scoped", i);
+  }, 3000)})(i);
+}
+
+/*
+  Output: 
+    Withing timeout var but used block scoped 0
+    Withing timeout var but used block scoped 1
+    Withing timeout var but used block scoped 2
+    Withing timeout var but used block scoped 3
+*/
+
 // ----------------------------------
 const reverseStr = (str) => str.split("").reverse().join("");
+
 console.log(reverseStr("kajal"));
+
+/*
+  Output: lajak
+*/
+
 // ----------------------------------
 var arr2 = [{ radius: 5 }, { radius: 9 }, { radius: 2 }];
 const arrComparator = (arr) => arr.sort((a, b) => a.radius - b.radius);
+
 console.log(arrComparator(arr2));
+
+/*
+  Output: [
+    0: {radius: 2}
+    1: {radius: 5}
+    2: {radius: 9}
+  ]
+*/
 // ----------------------------------
 let myArr = [1, 2, 3];
 myArr[5] = 6;
+
 console.log(myArr, myArr.length);
+
+/*
+  Output: [1, 2, 3, empty × 2, 6] 6
+*/
 
 // ----------------------------------
 var strArray = ["kajal", "mapare", "kaj"];
 const largestStr = strArray.reduce((prev, curr) => {
   return prev.length > curr.length ? prev : curr;
 }, "");
+
 console.log(largestStr);
+
+/*
+  Output: mapare
+*/
+
 // ----------------------------------
 let myArr2 = [1, 2, 3];
 const sumOfSquares = myArr2.map((num) => num * num).reduce((a, b) => a + b, 0);
+
 console.log(sumOfSquares);
+
+/*
+  Output: 14
+*/
+
 // ----------------------------------
 let myArr3 = [1, 2, 3];
 const getEvenNumbers = () =>
   // return Array.prototype.slice.call(arguments);
   myArr3.filter((num) => num % 2 === 0);
+
 console.log(getEvenNumbers());
+
+/*
+  Output: [2]
+*/
+
 // ----------------------------------
 const getOutput = (arr, criteriaFun) =>
   arr.filter((data) => !criteriaFun(data));
 
 const fun = (num) => num % 2 === 0;
+
 console.log(getOutput([1, 2, 3, 4], fun));
+
+/*
+  Output: [1, 3]
+*/
+
 // ----------------------------------
 function CircleX(r) {
   this.radius = r;
 }
 var c = new CircleX(2);
 console.log(c, c.radius);
+
 CircleX.prototype.perimeter = function () {
   return Math.PI * 2 * this.radius;
 };
+
 console.log(c.perimeter());
+
+/*
+  Output: 
+    CircleX {radius: 2}
+    12.566370614359172
+*/
+
 // ----------------------------------
 function Shape() {
   this.area = function () {
@@ -195,9 +332,18 @@ function Rectangle(height, width) {
 }
 Square.prototype = new Shape();
 Rectangle.prototype = new Shape();
+
 console.log(new Square(2).area());
 console.log(new Rectangle(2, 3).area());
+
+/*
+  Output: 
+    4
+    You need to implement this!
+*/
+
 // ---------------------------
+
 // function C(r) {
 //   this.rX = r;
 // }
@@ -209,6 +355,7 @@ console.log(new Rectangle(2, 3).area());
 //The area property gets defined in the
 // window object, because the new
 // keyword was not used with the function constructor.
+
 // ---------------------------
 
 // "xyx".isPalindrome() should return true.
@@ -216,5 +363,11 @@ String.prototype.isPalindrome = function () {
   const reverseStr = this.split("").reverse().join("");
   return this === reverseStr;
 };
+
 console.log("Is palindrome:", "xyx".isPalindrome());
+
+/*
+  Output: true
+*/
+
 // ---------------------------
