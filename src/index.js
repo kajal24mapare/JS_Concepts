@@ -201,12 +201,13 @@ for (var i = 0; i < arr.length; i++) {
   Output: Withing timeout var 4 (4 times)
 */
 
-
 var arrX = [10, 32, 65, 2];
 for (var i = 0; i < arrX.length; i++) {
-  ((i) => {setTimeout(function () {
-    console.log("Withing timeout var but used block scoped", i);
-  }, 3000)})(i);
+  ((i) => {
+    setTimeout(function () {
+      console.log("Withing timeout var but used block scoped", i);
+    }, 3000);
+  })(i);
 }
 
 /*
@@ -371,3 +372,104 @@ console.log("Is palindrome:", "xyx".isPalindrome());
 */
 
 // ---------------------------
+
+// Error handling
+
+function sum() {
+  var args = Array.prototype.slice.call(arguments);
+  return args.reduce((acc, b) => acc + b, 0);
+}
+
+console.log("sum of 1,2,3: ", sum(1, 2, 3));
+console.log("sum of 1,2,s: ", sum(1, 2, "s"));
+
+function sumWithErrHandling() {
+  var args = Array.prototype.slice.call(arguments);
+  return args.reduce((acc, b) => {
+    if (!isNaN(b)) {
+      return acc + b;
+    } else {
+      throw Error("Non-numeric argument");
+      // result of above line in browser:
+      console.log("Uncaught Error: Non-numeric argument", b);
+      // above line will not execute need try catch block
+      // throwing err will stop executyion and we cannot proceed
+      // hence catch that err
+    }
+  }, 0);
+}
+
+// console.log("sumWithErrHandling of 1,2,s: ", sumWithErrHandling(1, 2, "s"));
+
+function test() {
+  try {
+    sumWithErrHandling(1, 2, "s");
+  } catch (error) {
+    console.log("Catched error", error);
+  }
+  console.log("doing smthng else");
+}
+
+test();
+
+/*
+ * Output:
+ *  sum of 1,2,3: 6
+ *  sum of 1,2,"s":  3s
+ *  Uncaught Error: Non-numeric argument s // will not get consoled
+ *  Catched error Error: Non-numeric argument
+ *  doing smthng else
+ */
+
+//------------------------------------------------------
+console.log(document);
+console.log(document.documentElement);
+console.log(document.head);
+
+// getElementById, name, tag, attribute
+
+/*
+ * Output: #document with all nodes
+ * <html> .... </html>
+ * <head> ... </head>
+ */
+
+//------------------------------------------------------
+/*
+
+var globalVar = 4;
+
+window.globalVar;
+// 4
+function testX() {
+  var localVar = 5;
+  console.log(localVar);
+}
+testX();
+// 5
+window.localVar;
+// undefined
+function test2() {
+  localWithoutVar = 5;
+}
+
+window.localWithoutVar;
+// undefined
+test2();
+// undefined
+window.localWithoutVar;
+// 5
+
+*/
+
+//--------------------------------------------
+
+var age = 21;
+var guessTheAge = function () {
+  console.log("age in inner fun before", age); // undefined
+  var age = 20;
+  console.log("age in inner fun after", age); // 20
+};
+console.log("age outer after", age); //21
+
+//--------------------------------------------
