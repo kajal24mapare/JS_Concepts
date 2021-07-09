@@ -473,3 +473,26 @@ var guessTheAge = function () {
 console.log("age outer after", age); //21
 
 //--------------------------------------------
+
+// call, apply, bind
+
+var obj = { num: 2 };
+var addToThis = function add(a, b) {
+  return this.num + a + b;
+};
+
+console.log(addToThis.call(obj, 3, 1)); // 6
+// not giving all func args results NaN on addition
+
+console.log(addToThis.apply(obj, [3, 1])); // 6
+
+console.log(addToThis.bind(obj, [3, 1]));
+/*
+  ƒ add(a, b) {
+    return this.num + a + b;
+  } 
+*/
+var bound = addToThis.bind(obj);
+console.log(bound(3, 1)); //6
+
+//--------------------------------------------
