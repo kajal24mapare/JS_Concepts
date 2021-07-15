@@ -496,3 +496,16 @@ var bound = addToThis.bind(obj);
 console.log(bound(3, 1)); //6
 
 //--------------------------------------------
+
+// sort w/o sort() function
+for (let i = 0; i< x.length; i++) {
+    if (i+1 !== x.length) {
+        if (x[i] > x[i+1]) {
+            var temp = x[i];
+            x[i] = x[i+1];
+            x[i+1] = temp;
+        }
+    }
+}
+
+//--------------------------------------------
