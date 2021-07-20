@@ -510,3 +510,103 @@ for (let i = 0; i < x.length; i++) {
 }
 console.log("After sort: ", x);
 //--------------------------------------------
+
+/*
+ * Recursion
+ */
+
+// 1) sum of all numbers from 1 up to the number passed in.
+var addAll = (n) => {
+  if (n === 1) {
+    return 1;
+  }
+  return addAll(n - 1) + n;
+};
+console.log("Sum: ", addAll(5));
+
+// 2) power which takes in a base and an exponent
+var powerValue = (base, exp) => {
+  if (exp === 1) {
+    return base;
+  }
+  return powerValue(base, exp - 1) * base;
+};
+console.log("Power: ", powerValue(5, 3));
+
+// 3) Factorial
+var factVal = (n) => {
+  if (n === 2) {
+    return 2;
+  }
+  return factVal(n - 1) * n;
+};
+console.log("Factorial", factVal(5));
+
+// 4) Write a function called all which
+// accepts an array and a callback and
+// returns true if every value in the
+// array returns true when passed as
+// parameter to the callback function
+var all = (arr, fun) => {
+  var shallowCopy = shallowCopy || arr.slice();
+  if (shallowCopy.length === 0) return true;
+  if (fun(shallowCopy[0])) {
+    shallowCopy.shift();
+    return all(shallowCopy, fun);
+  } else {
+    return false;
+  }
+};
+var allAreLessThanSeven = all([1, 3, 6], function (num) {
+  return num < 7;
+});
+
+console.log("allAreLessThanSeven", allAreLessThanSeven); // false
+
+// 5)  productOfArray which takes in an array of numbers and returns the product of them all
+var productOfArray = (arr) => {
+  if (arr.length === 0) {
+    return 1;
+  }
+  var num = arr.shift();
+  return productOfArray(arr) * num;
+};
+var sixty = productOfArray([1, 2, 3, 10]); // 60
+console.log("ProductOfArray: ", sixty);
+
+// 6) contains that searches for a value in a
+// nested object. It returns
+// true if the object contains that value.
+var nestedObject = {
+  data: {
+    info: {
+      stuff: {
+        thing: {
+          moreStuff: {
+            magicNumber: 44,
+            something: "foo2"
+          }
+        }
+      }
+    }
+  }
+};
+var contains = (obj, val) => {
+  for (let property in obj) {
+    if (typeof obj[property] === "object") {
+      return contains(obj[property], val);
+    } else {
+      if (obj[property] === val) {
+        return true;
+      }
+    }
+    return false;
+  }
+};
+let hasIt = contains(nestedObject, 44); // true
+let doesntHaveIt = contains(nestedObject, "foo"); // false
+console.log("hasIt", hasIt, "doesntHaveIt", doesntHaveIt);
+
+// https://www.codingame.com/playgrounds/5422/js-interview-prep-recursion
+
+// -------------------------------------------------------
